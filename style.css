@@ -1,0 +1,593 @@
+:root {
+    --bg-deep: #0B0620;
+    --card: rgba(21, 14, 40, 0.78);
+    --surface: rgba(255, 255, 255, 0.04);
+    --text: #F1EEFB;
+    --muted: #8C84B0;
+    --pink: #FF2E92;
+    --cyan: #2EE6FF;
+    --correct: #3ECF8E;
+    --wrong: #FF6B6B;
+    --html-c: #FF8A4D;
+    --css-c: #2EE6FF;
+    --js-c: #FCEE54;
+    --base-glow: 0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+        0 0 40px -10px rgba(255, 46, 146, 0.28),
+        0 0 70px -20px rgba(46, 230, 255, 0.22),
+        0 30px 60px -30px rgba(0, 0, 0, 0.75);
+    --radius: 20px;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background:
+        radial-gradient(circle at 15% 8%, rgba(255, 46, 146, 0.16) 0%, transparent 42%),
+        radial-gradient(circle at 88% 14%, rgba(46, 230, 255, 0.14) 0%, transparent 42%),
+        var(--bg-deep);
+    color: var(--text);
+    font-family: "Sora", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 26px 20px 50px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.grid-floor {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30vh;
+    background-image:
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px 42px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px 42px);
+    transform: perspective(280px) rotateX(62deg);
+    transform-origin: bottom;
+    -webkit-mask-image: linear-gradient(to top, black 0%, transparent 78%);
+    mask-image: linear-gradient(to top, black 0%, transparent 78%);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.65;
+    animation: gridScroll 1.4s linear infinite;
+}
+
+@keyframes gridScroll {
+    from {
+        background-position: 0 0, 0 0;
+    }
+
+    to {
+        background-position: 0 42px, 0 0;
+    }
+}
+
+main {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mono {
+    font-family: "JetBrains Mono", monospace;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-family: "Orbitron", sans-serif;
+    font-weight: 700;
+    font-size: clamp(24px, 4.2vw, 34px);
+    letter-spacing: 0.03em;
+    margin-bottom: 7px;
+    background: linear-gradient(90deg, var(--pink), var(--cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+header p {
+    color: var(--muted);
+    font-size: 12.5px;
+}
+
+header p .c1 {
+    color: var(--html-c);
+}
+
+header p .c2 {
+    color: var(--css-c);
+}
+
+header p .c3 {
+    color: var(--js-c);
+}
+
+/* ---------- Deck ---------- */
+.deck-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+}
+
+.card {
+    background: var(--card);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius);
+    box-shadow: var(--base-glow);
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes flashGlow {
+    0% {
+        box-shadow: 0 0 0 2px rgba(var(--flash-color), 0.55), 0 0 55px -5px rgba(var(--flash-color), 0.55), var(--base-glow);
+    }
+
+    100% {
+        box-shadow: var(--base-glow);
+    }
+}
+
+.quiz-card.flash-correct {
+    --flash-color: 62, 207, 142;
+    animation: flashGlow 0.6s ease;
+}
+
+.quiz-card.flash-wrong {
+    --flash-color: 255, 107, 107;
+    animation: flashGlow 0.6s ease;
+}
+
+/* ---------- Window chrome ---------- */
+.window-bar {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 8px currentColor;
+}
+
+.dot.red {
+    background: var(--wrong);
+    color: var(--wrong);
+}
+
+.dot.yellow {
+    background: var(--js-c);
+    color: var(--js-c);
+}
+
+.dot.green {
+    background: var(--correct);
+    color: var(--correct);
+}
+
+.window-title {
+    margin-left: 6px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.card-body {
+    padding: 26px 26px 24px;
+}
+
+@keyframes pageOut {
+    to {
+        transform: translateX(-36px) rotate(-4deg);
+        opacity: 0;
+    }
+}
+
+@keyframes pageIn {
+    from {
+        transform: translateX(36px) rotate(4deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0) rotate(0);
+        opacity: 1;
+    }
+}
+
+.card-body.page-out {
+    animation: pageOut 0.22s ease forwards;
+}
+
+.card-body.page-in {
+    animation: pageIn 0.3s ease forwards;
+}
+
+/* ---------- Quiz header row ---------- */
+.quiz-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.q-counter {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.timer-chip {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--cyan);
+    text-shadow: 0 0 8px rgba(46, 230, 255, 0.6);
+    background: rgba(46, 230, 255, 0.08);
+    border: 1px solid rgba(46, 230, 255, 0.35);
+    border-radius: 999px;
+    padding: 4px 14px;
+    min-width: 50px;
+    text-align: center;
+}
+
+.timer-chip.low {
+    color: var(--wrong);
+    text-shadow: 0 0 8px rgba(255, 107, 107, 0.7);
+    background: rgba(255, 107, 107, 0.08);
+    border-color: rgba(255, 107, 107, 0.45);
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+.timer-track {
+    height: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.timer-fill {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, var(--pink), var(--cyan));
+    transition: width 1s linear, background 0.3s ease;
+}
+
+.timer-fill.low {
+    background: linear-gradient(90deg, var(--wrong), #FFA9A9);
+}
+
+/* ---------- Category tag ---------- */
+.tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 3px 12px;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    background: transparent;
+    text-shadow: 0 0 8px currentColor;
+    margin-bottom: 14px;
+}
+
+.tag-html {
+    color: var(--html-c);
+}
+
+.tag-css {
+    color: var(--css-c);
+}
+
+.tag-js {
+    color: var(--js-c);
+}
+
+/* ---------- Question + options ---------- */
+.question-text {
+    font-size: 17.5px;
+    font-weight: 600;
+    line-height: 1.45;
+    margin-bottom: 22px;
+    min-height: 50px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.option-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: inherit;
+    font-size: 14.5px;
+    text-align: left;
+    background: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    color: var(--text);
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.option-btn:hover:not(:disabled) {
+    border-color: var(--cyan);
+    background: rgba(46, 230, 255, 0.07);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -14px rgba(46, 230, 255, 0.5);
+}
+
+.option-btn:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 2px;
+}
+
+.option-btn:disabled {
+    cursor: default;
+}
+
+.option-btn.correct {
+    border-color: var(--correct);
+    background: rgba(62, 207, 142, 0.1);
+    color: var(--correct);
+    font-weight: 600;
+    box-shadow: 0 0 24px -8px rgba(62, 207, 142, 0.5);
+}
+
+.option-btn.wrong {
+    border-color: var(--wrong);
+    background: rgba(255, 107, 107, 0.1);
+    color: var(--wrong);
+    font-weight: 600;
+    box-shadow: 0 0 24px -8px rgba(255, 107, 107, 0.5);
+}
+
+.opt-letter {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid var(--pink);
+    color: var(--pink);
+    box-shadow: 0 0 8px rgba(255, 46, 146, 0.35);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.option-btn.correct .opt-letter {
+    border-color: var(--correct);
+    color: var(--correct);
+    box-shadow: 0 0 8px rgba(62, 207, 142, 0.45);
+}
+
+.option-btn.wrong .opt-letter {
+    border-color: var(--wrong);
+    color: var(--wrong);
+    box-shadow: 0 0 8px rgba(255, 107, 107, 0.45);
+}
+
+.opt-text {
+    flex: 1;
+}
+
+.opt-icon {
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.option-btn.correct .opt-icon {
+    color: var(--correct);
+}
+
+.option-btn.wrong .opt-icon {
+    color: var(--wrong);
+}
+
+/* ---------- Footer ---------- */
+.quiz-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remaining {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.progress-segments {
+    display: flex;
+    gap: 5px;
+}
+
+.segment {
+    flex: 1;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.segment.completed {
+    background: linear-gradient(90deg, var(--pink), var(--cyan));
+    border-color: transparent;
+}
+
+.segment.current {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: var(--cyan);
+    box-shadow: 0 0 8px rgba(46, 230, 255, 0.55);
+    animation: segPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes segPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.45;
+    }
+}
+
+button.primary {
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    border-radius: 999px;
+    padding: 11px 26px;
+    cursor: pointer;
+    background: linear-gradient(90deg, var(--pink), var(--cyan));
+    color: #0B0620;
+    box-shadow: 0 0 18px -3px rgba(255, 46, 146, 0.55), 0 0 26px -6px rgba(46, 230, 255, 0.45);
+    transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+button.primary:hover:not(:disabled) {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+}
+
+button.primary:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+button.primary:disabled {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--muted);
+    box-shadow: none;
+    cursor: default;
+}
+
+button.primary:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+}
+
+/* ---------- Result card ---------- */
+.result-card {
+    display: none;
+    text-align: center;
+}
+
+.result-card.visible {
+    display: block;
+    animation: popIn 0.35s ease;
+}
+
+.deck-wrapper.hidden,
+.card.quiz-card.hidden {
+    display: none;
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.94) translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.score-value {
+    font-family: "Orbitron", sans-serif;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, var(--pink), var(--cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 18px rgba(255, 46, 146, 0.35));
+}
+
+.score-percent {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+.score-message {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 26px;
+}
+
+@media (max-width: 420px) {
+    .card-body {
+        padding: 22px 20px 20px;
+    }
+
+    .grid-floor {
+        opacity: 0.4;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .grid-floor,
+    .timer-chip.low,
+    .card-body.page-out,
+    .card-body.page-in,
+    .quiz-card.flash-correct,
+    .quiz-card.flash-wrong,
+    .result-card.visible,
+    .segment.current {
+        animation: none !important;
+    }
+}
