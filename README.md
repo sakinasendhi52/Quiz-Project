@@ -10,7 +10,7 @@
 
 ## 📑 Table of Contents
 
-- [Description](#-description)
+- [Project Description](#-project-description)
 - [How This Project is Made](#-how-this-project-is-made)
 - [Features](#-features)
 - [Technologies Used](#-technologies-used)
@@ -114,9 +114,6 @@ This project is built using HTML, CSS, and JavaScript to create an interactive *
 ### 📊 Progress Segments
 - A row of 10 segments shows quiz progress: completed questions are filled, the current question pulses, and upcoming questions remain dim.
 
-### 🃏 Deck Animation
-- Two "ghost" cards sit behind the main quiz card, giving the impression of a physical card deck that shrinks as questions are completed.
-
 ### ✅ Answer Feedback
 - Selecting an option locks all choices, highlights the correct and/or incorrect answer, and triggers a glowing flash around the card.
 
@@ -132,6 +129,7 @@ This project is built using HTML, CSS, and JavaScript to create an interactive *
 Web-Dev-Quiz/
 │
 ├── assets/
+│   ├── output.png
 │   └── quiz.png
 │
 ├── index.html
@@ -153,12 +151,8 @@ Web-Dev-Quiz/
 | | |
 |---|---|
 | 🔗 Live Demo                 | https://fullstack-web-dev-quiz.netlify.app/ |
-| 🎥 Project Explanation Video | _(add your video link here)_ |
-| 🎥 Project Explanation Video | _(add your video link here)_ |
-
-<div align="center">
-<img src="assets/result-screen.png" width="500" alt="Quiz result screen">
-</div>
+| 🎥 Project Explanation Video | https://drive.google.com/file/d/1qxCGEkntRGptnljaiWyfpCIYVIg5hYxh/view?usp=sharing |
+| 🎥 Project Recording | https://drive.google.com/file/d/1W2haHAd4owW7zcWEbxuExAEmmb_wWrWE/view?usp=sharing |
 
 ---
 
