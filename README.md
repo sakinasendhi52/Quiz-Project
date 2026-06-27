@@ -25,7 +25,7 @@
 
 ## 📌 Project Description
 
-The Web Dev Quiz is built using **HTML**, **CSS**, and **JavaScript**. It presents 10 multiple-choice questions covering HTML, CSS, and JavaScript fundamentals, with a 15-second timer per question, instant answer feedback, an animated card-deck visual, and a final score screen.
+The Web Dev Quiz is built using **HTML**, **CSS**, and **JavaScript**. It presents 10 multiple-choice questions covering HTML, CSS, and JavaScript fundamentals, with a 15-second timer per question, instant answer feedback, and a final score screen.
 
 This project is designed to strengthen JavaScript fundamentals through practical implementation of timers, event handling, and dynamic content updates.
 
