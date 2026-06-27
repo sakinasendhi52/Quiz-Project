@@ -129,7 +129,7 @@ Web-Dev-Quiz/
 │   ├── output.png
 │   └── quiz.png
 │
-├── index.html
+├── quiz.html
 ├── style.css
 ├── script.js
 └── README.md
