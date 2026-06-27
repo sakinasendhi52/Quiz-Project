@@ -77,7 +77,7 @@ This project is built using HTML, CSS, and JavaScript to create an interactive *
 
 ---
 
-## 🛠️ Technologies Used
+## 🔧 Technologies Used
 
 - HTML5
 - CSS3
@@ -101,7 +101,7 @@ This project is built using HTML, CSS, and JavaScript to create an interactive *
 
 ---
 
-## ⚙️ How It Works
+## 🔄 How It Works
 
 ### ⏱️ Timer & Auto-Advance
 - Each question starts a 15-second countdown using `setInterval()`.
@@ -156,7 +156,7 @@ Web-Dev-Quiz/
 
 ---
 
-## 👩‍💻 Author
+## 💻 Author
 
 <div align="center">
 
