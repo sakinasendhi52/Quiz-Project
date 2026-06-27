@@ -66,14 +66,11 @@ This project is built using HTML, CSS, and JavaScript to create an interactive *
 - Manual "Next" / "Finish" button after answering
 - Instant answer feedback with color-coded correct (✓) and wrong (✕) highlighting
 - Color-coded category tags for HTML, CSS, and JavaScript questions
-- Animated card-deck visual with "ghost" cards representing remaining questions
 - Segmented progress bar showing completed, current, and upcoming questions
-- Smooth slide transition animation between questions
 - Glowing flash effect on the card for correct and wrong answers
 - Final score screen with percentage and a performance-based message
 - "Retake Quiz" option to restart from the beginning
 - Fully responsive, neon-themed user interface
-- Accessible motion handling via `prefers-reduced-motion`
 
 ---
 
